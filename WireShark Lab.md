@@ -6,7 +6,7 @@ demonstrate that you’ve been able to get Wireshark up and running, and have ex
 capabilities. Answer the following questions, based on your Wireshark experimentation:
 
 
-1.List 3 different protocolsthat appear in the protocol column in the unfiltered packet-listing 
+1.List 3 different protocols that appear in the protocol column in the unfiltered packet-listing 
 window in step 7 above.
 
 

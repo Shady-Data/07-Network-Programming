@@ -12,7 +12,7 @@ In the preceding example, we are using the capital L switch (-L) to maintain a p
 
 The –vv switch tells Netcat to be extra verbose with its output. For this particular feature, the –vv switch will not do much; however, in file transfers and other use cases it will, as we will see later.
 
-The –e switch is where the magic happens. As noted in the Installation section, the –e switch indicates the DGAPING_SECURITY_HOLE feature, and allows us to do the devious things we are about to do. cmd.exe is the name of the executable for a command shell in Windows. Now, given the context and the steps explained previously, perhaps it is more understandable as to why Antivirus packages and firewalls flag Netcat as potentially malicious.
+The –e switch is where the magic happens. As noted in the Installation section, the –e switch indicates the GAPING_SECURITY_HOLE feature, and allows us to do the devious things we are about to do. cmd.exe is the name of the executable for a command shell in Windows. Now, given the context and the steps explained previously, perhaps it is more understandable as to why Antivirus packages and firewalls flag Netcat as potentially malicious.
 
 ## Connecting to the target
 Connecting to the target is as simple as our first exercises, and simply consists of the following string:
