@@ -96,16 +96,23 @@ def my_xor(p_string, key_len):
     keys = [str(k) for k in range(10**(key_len - 1), 10**key_len)]
     all_xors = {}
 
+    if key_len == 2:
+        for k in range(9, -1 , -1):
+            keys.insert(0, '0' + str(k))
+
     # convert the string from hex if necessary
     if p_string[:2] == b'0x':
-        p_string = str(binascii.unhexlify(p_string[2:]))
+        p_string = binascii.unhexlify(p_string[2:])
 
     # build a dictionary of xors with the key
     for key in keys:
         out_str = ''
         for i, c in enumerate(p_string):
             k = key[i % len(key)]
-            x = ord(k) ^ ord(c)
+            if isinstance(c, str):
+                x = ord(k) ^ ord(c)
+            else:
+                x = ord(k) ^ c
             # print(c, k, x, chr(x))
             if chr(x) in string.printable:
                 out_str += chr(x)
