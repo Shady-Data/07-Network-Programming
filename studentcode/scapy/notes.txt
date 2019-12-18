@@ -1,0 +1,58 @@
+# check tha scapy is installed for python
+python3
+>>> import scapy
+- if scapy fails to import
+>>> quit()
+-- pip3 install scapy
+
+# start scapy interactively
+scapy # ran from bash
+
+# create a IP() object
+mypkt = IP()
+
+# show the contents of the packet
+mypkt.show()
+
+# find the gateway for your system
+route -n # from bash terminal
+
+# set the destination to your gateway in scapy
+mypkt.dst = '10.0.2.1'
+
+# verify that the change took
+mypkt.show()
+# the .src attribute was automatically changed to your interface's IP
+
+# create an ICMP packet
+myicmp = ICMP()
+
+
+# start a capture in wireshark for your network interface
+
+# send the ICMP packet to the gateway
+send(mypkt/myicmp/'scapy program')
+
+# check your wireshark capture to verify the results
+
+# create a script that automatically sends an icmp packet
+icmp.py
+-	#!/usr/bin/env python3
+
+-	from scapy.all import *
+
+-	dst_ip = '10.0.2.1'
+
+-	pkt = IP(dst=dst_ip)/ICMP()/"hello world"
+-	send(pkt)
+
+# make the file executable
+chmod +x icmp.py
+./icmp.py
+# also callable without the x permission
+python3 icmp.py
+ 
+# netdiscover is a powerful reconnaisance tool
+netdiscover -i eth0 -r 10.0.2.0/24
+
+
