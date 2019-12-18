@@ -10,3 +10,8 @@
 
 5. Create a programming script to extract and display all the image links from https://en.wikipedia.org/wiki/United_States_Air_Force.
 
+6. Create a programming script to find and print all "li" tags of a given web page.
+
+7. Create a python program to a list of all the h1, h2, h3 tags from the webpage python.org.
+
+8. Create a Python script to get the number of security alerts issued by US-CERT in the current year.
