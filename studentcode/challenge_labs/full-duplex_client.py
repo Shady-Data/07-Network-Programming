@@ -1,37 +1,39 @@
 #!/usr/bin/env python3
 
 import socket
-import concurrent.futures
+from random import randint
+import threading
+from time import sleep
 
 HOST = 'localhost'
 PORT = 13373
 ADDR = (HOST, PORT)
 BUFF = 1024
 
-def client_send(conn):
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(ADDR)
+
+def client_send():
     try:
         while True:
             msg = input(' > ')
             if not msg:
                 break
-            conn.send(msg.encode())
+            client.send(msg.encode())
     except KeyboardInterrupt:
         return
 
-def client_receive(conn):
+def client_receive():
     try:
         while True:
-            data = conn.recv(BUFF)
+            data = client.recv(BUFF)
             print(data.decode('utf-8'))
     except KeyboardInterrupt:
         return
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDR)
+t1 = threading.Thread(target=client_send, name=3)
+t2 = threading.Thread(target=client_receive, name=4)
 
-with concurrent.futures.ThreadPoolExecutor() as executor: 
-    t1 = executor.submit(client_send, client)
-    t2 = executor.submit(client_receive, client)
+t1.start()
+t2.start()
 
-    t1.add_done_callback(t2.cancel())
-    t2.add_done_callback(client.close())
