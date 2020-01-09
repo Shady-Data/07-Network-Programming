@@ -13,13 +13,23 @@ def parse_args():
     parser.add_argument('-p', '--path', help='File path of the directory/file to be listed')
     return parser.parse_args()
 
+def get_largestfs(p_path):
+    with os.scandir(p_path) as dirEntries:
+        return max([f.stat().st_size for f in dirEntries])
+
+def get_mostlinks(p_path):
+    with os.scandir(p_path) as dirEntries:
+        return max([f.stat().st_nlink for f in dirEntries])
+
 def list_directory(p_path='.'):
     users = get_users()
     groups = get_groups()
     directory_list = os.scandir(p_path)
+    longest_filesize = len(str(get_largestfs(p_path)))
+    longest_links = len(str(get_mostlinks(p_path)))
     for f in directory_list:
         stats = f.stat()
-        print('{:10} {} {} {:5} {} {}'.format(stat.filemode(stats.st_mode), users[str(stats.st_uid)], groups[str(stats.st_gid)], stats.st_size, datetime.datetime.fromtimestamp(stats.st_mtime).strftime('%h %d %H:%M'), f.name))
+        print('{:10} {:{}} {} {} {:{}} {} {}'.format(stat.filemode(stats.st_mode), stats.st_nlink, longest_links, users[str(stats.st_uid)], groups[str(stats.st_gid)], stats.st_size, longest_filesize, datetime.datetime.fromtimestamp(stats.st_mtime).strftime('%h %d %H:%M'), f.name))
 
 def get_users():
     users = {}
